@@ -13,7 +13,7 @@ describe('HomePage', () => {
   afterEach(() => vi.useRealTimers())
   it('muestra el logo y el nombre durante dos segundos', () => {
     renderPage()
-    expect(screen.getByRole('status')).toHaveAccessibleName('Cargando SecureCommerce Advisor')
+    expect(screen.getByRole('status')).toHaveAccessibleName('Cargando SGSI-UFVV')
     expect(screen.getByText('SecureCommerce')).toBeInTheDocument()
     act(() => vi.advanceTimersByTime(1999))
     expect(screen.getByRole('status')).toBeInTheDocument()

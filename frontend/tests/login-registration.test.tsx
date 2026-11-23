@@ -18,7 +18,7 @@ describe('registro desde el selector de empresas', () => {
     await user.type(screen.getByLabelText('Correo electrónico'), 'admin@example.test')
     await user.type(screen.getByLabelText('Contraseña'), 'Clave-Segura-2026!')
     await user.click(screen.getByRole('button', { name: 'Ingresar' }))
-    expect(await screen.findByRole('status')).toHaveAccessibleName('Cargando SecureCommerce Advisor')
+    expect(await screen.findByRole('status')).toHaveAccessibleName('Cargando SGSI-UFVV')
     expect(await screen.findByText('Seleccione la empresa', {}, { timeout: 3000 })).toBeInTheDocument()
     const button = screen.queryByRole('button', { name: 'Registrar una empresa' })
     expect(Boolean(button)).toBe(role === 'org_admin')

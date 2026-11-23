@@ -100,7 +100,7 @@ export function LoginPage() {
       <section className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
         <div className="flex items-center gap-3 text-blue-950">
           <span className="rounded-xl bg-blue-950 p-2 text-white"><ShieldCheck aria-hidden="true" /></span>
-          <div><h1 className="text-xl font-bold">Iniciar sesión</h1><p className="text-sm text-slate-600">SecureCommerce Advisor</p></div>
+          <div><h1 className="text-xl font-bold">Iniciar sesión</h1><p className="text-sm text-slate-600">SGSI-UFVV · Universidad Ficticia del Valle Verde</p></div>
         </div>
         {organizations.length > 0 ? <div className="mt-7 space-y-3">
           <p className="font-semibold text-blue-950">Seleccione la empresa</p>

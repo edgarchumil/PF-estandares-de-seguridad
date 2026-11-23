@@ -450,7 +450,7 @@ def build_pdf(path: Path, report_type: str, data: dict[str, Any]) -> None:
         canvas.rect(0, A4[1] - 16 * mm, A4[0], 16 * mm, fill=1, stroke=0)
         canvas.setFillColor(colors.white)
         canvas.setFont("Helvetica-Bold", 8)
-        canvas.drawString(18 * mm, A4[1] - 10 * mm, "SECURECOMMERCE ADVISOR")
+        canvas.drawString(18 * mm, A4[1] - 10 * mm, "SGSI-UFVV")
         canvas.setFont("Helvetica", 7)
         canvas.drawRightString(192 * mm, A4[1] - 10 * mm, "CONFIDENCIAL · USO INTERNO")
         canvas.setStrokeColor(LINE)
@@ -469,6 +469,6 @@ def build_pdf(path: Path, report_type: str, data: dict[str, Any]) -> None:
         topMargin=24 * mm,
         bottomMargin=22 * mm,
         title=str(data["title"]),
-        author="SecureCommerce Advisor",
+        author="SGSI-UFVV",
     )
     doc.build(story, onFirstPage=frame, onLaterPages=frame)

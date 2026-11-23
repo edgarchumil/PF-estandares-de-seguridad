@@ -26,9 +26,9 @@ export function HomePage() {
     <main className="landing min-h-screen overflow-hidden bg-[#f7fafc] text-slate-950">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#061b35]/90 text-white backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8">
-          <Link className="flex items-center gap-3" to="/" aria-label="SecureCommerce Advisor, inicio">
+          <Link className="flex items-center gap-3" to="/" aria-label="SGSI-UFVV, inicio">
             <span className="grid size-10 place-items-center rounded-xl bg-cyan-400 text-[#061b35] shadow-[0_0_28px_rgba(34,211,238,.25)]"><ShieldCheck size={25} strokeWidth={2.3} aria-hidden="true" /></span>
-            <span className="leading-tight"><span className="block text-base font-bold tracking-tight sm:text-lg">SecureCommerce</span><span className="block text-[10px] font-semibold uppercase tracking-[0.26em] text-cyan-300">Advisor</span></span>
+            <span className="leading-tight"><span className="block text-base font-bold tracking-tight sm:text-lg">SGSI-UFVV</span><span className="block text-[10px] font-semibold uppercase tracking-[0.16em] text-cyan-300">Universidad Ficticia</span></span>
           </Link>
           <nav className="hidden items-center gap-8 text-sm font-medium text-slate-200 md:flex" aria-label="Navegación principal">
             <a className="transition hover:text-cyan-300" href="#solucion">Solución</a><a className="transition hover:text-cyan-300" href="#como-funciona">Cómo funciona</a><a className="transition hover:text-cyan-300" href="#beneficios">Beneficios</a>
@@ -43,7 +43,7 @@ export function HomePage() {
         <div className="hero-glow absolute inset-0" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-[1.03fr_.97fr]">
           <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-cyan-300"><Sparkles size={14} aria-hidden="true" /> Ciberseguridad inteligente para MIPYMES</div>
+            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-300/25 bg-cyan-300/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-cyan-300"><Sparkles size={14} aria-hidden="true" /> Sistema de Gestión de Seguridad de la Información</div>
             <h1 className="max-w-3xl text-4xl font-extrabold leading-[1.08] tracking-[-0.035em] sm:text-6xl lg:text-[4.15rem]">Proteja su empresa.<br /><span className="text-cyan-300">Decida con claridad.</span></h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 sm:text-xl">Identifique sus activos críticos, evalúe riesgos y reciba recomendaciones claras con apoyo de inteligencia artificial, desde una sola plataforma.</p>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -80,7 +80,7 @@ export function HomePage() {
 
       <section id="beneficios" className="scroll-mt-20 bg-[#071f3b] py-20 text-white sm:py-24"><div className="mx-auto max-w-7xl px-5 text-center sm:px-8"><p className="section-eyebrow text-cyan-300">Seguridad al alcance de su empresa</p><h2 className="mx-auto mt-3 max-w-3xl text-3xl font-extrabold tracking-tight sm:text-5xl">Conozca sus riesgos antes de que se conviertan en incidentes</h2><p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-slate-300">Centralice la información, defina prioridades y construya una cultura de mejora continua.</p><Link className="mt-9 inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-400 px-7 py-3.5 font-bold text-[#061b35] transition hover:-translate-y-0.5 hover:bg-cyan-300" to="/login" state={{ showLoading: true }}>Comenzar ahora <ArrowRight size={18} /></Link></div></section>
 
-      <footer className="border-t border-slate-200 bg-white py-8"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 text-center text-sm text-slate-500 sm:px-8 md:flex-row md:text-left"><div className="flex items-center gap-2 font-bold text-[#082443]"><ShieldCheck className="text-cyan-600" size={20} /> SecureCommerce Advisor</div><p>Gestión preventiva de ciberseguridad para MIPYMES guatemaltecas.</p><p>© 2026 SecureCommerce</p></div></footer>
+      <footer className="border-t border-slate-200 bg-white py-8"><div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 text-center text-sm text-slate-500 sm:px-8 md:flex-row md:text-left"><div className="flex items-center gap-2 font-bold text-[#082443]"><ShieldCheck className="text-cyan-600" size={20} /> SGSI-UFVV</div><p>Seguridad de la información para una universidad ficticia.</p><p>© 2026 UFVV · Proyecto académico</p></div></footer>
     </main>
   )
 }

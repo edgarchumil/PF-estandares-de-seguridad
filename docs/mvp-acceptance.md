@@ -1,14 +1,14 @@
-# Verificación de aceptación del MVP
+# Estado de aceptación del prototipo SGSI-UFVV
 
-La Fase 10 completa los flujos navegables de organización, usuarios/roles, perfil, MFA, recuperación, activos, evaluación NIST, riesgos y tratamientos, recomendaciones, dashboard, reportes, incidentes, auditoría, configuración y sesiones.
+La aplicación base ofrece flujos locales de organizaciones y roles, perfil, MFA TOTP opcional, activos, evaluación NIST CSF, riesgos y tratamientos, recomendaciones, dashboard, reportes, incidentes, auditoría, configuración y sesiones. Los módulos se han reorientado visualmente a una universidad ficticia y el seed incluye un tenant educativo; una base persistente heredada conserva sus registros anteriores.
 
-## Evidencia automatizada
+La carpeta `docs/sgsi` contiene las matrices, políticas y decisiones académicas. El prototipo no equivale a SGSI certificado, no representa una universidad real ni acredita que se hayan desplegado Azure, MDM, DLP, EDR, SIEM o la arquitectura física descrita.
 
-- Pytest cubre cálculo determinístico, identidad, RBAC, aislamiento tenant, activos, evaluaciones, riesgos, IA, dashboard, PDF, incidentes y auditoría.
-- Vitest cubre navegación protegida, formularios, dashboard, módulos principales y accesibilidad automatizada.
-- Ruff, mypy, Bandit, pip-audit, npm audit, Gitleaks y Trivy forman la puerta de calidad.
-- Docker Compose valida PostgreSQL, Redis, API, Celery, frontend, Nginx, migraciones, reportes y backup cifrado.
+## Evidencia disponible / pendiente
 
-## Límites conscientes
-
-El MVP no equivale a certificación NIST o ISO. En producción deben conectarse OIDC/correo transaccional, S3/KMS, Secrets Manager, TLS/WAF y observabilidad administrada. Las funciones fuera del MVP permanecen excluidas según el documento maestro.
+- La aplicación y Compose son ejecutables en local; la base productiva de demostración anterior se conserva para evitar borrar datos sin autorización.
+- NIST CSF, activos, riesgos, tratamientos, incidentes, MFA y auditoría existen en el código base con diferentes niveles de configuración; la evaluación debe repetirse con datos UFVV y guardar evidencia sin secretos.
+- El respaldo cifrado local tiene scripts y runbook. La cadencia diaria no satisface el objetivo SIS de una hora; deben implementarse frecuencia o WAL y aprobarse una prueba de recuperación.
+- Azure cuenta con plantilla Bicep y herramientas de carga preparadas, no desplegadas.
+- Las suites automatizadas del repo heredado no se han ejecutado sobre esta adaptación. El cambio de seed y las etiquetas requieren revisar y luego ejecutar la suite antes de declarar aceptación.
+- Falta capturar evidencia real de cloud, restauración, separación de red, telemetría, MDM/DLP, operación de servicios y sala física.

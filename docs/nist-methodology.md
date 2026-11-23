@@ -1,5 +1,7 @@
-# Metodología NIST CSF 2.0
+# NIST CSF 2.0 y evaluación de SGSI-UFVV
 
-La Fase 4 implementa un catálogo inicial NIST CSF 2.0 con Govern, Identify, Protect, Detect, Respond y Recover. Cada pregunta conserva función, categoría, control/subcategoría, ayuda, peso, evidencia esperada, opciones y recomendación base.
+El prototipo conserva una evaluación basada en NIST CSF 2.0 con las funciones Govern, Identify, Protect, Detect, Respond y Recover. La escala de madurez va de 0 (no implementado) a 4 (gestionado); el cálculo es determinista y la salida indica perfil, brechas y madurez. La autoevaluación no es auditoría ni certificación.
 
-La escala es 0 No implementado, 1 Inicial, 2 Parcial, 3 Implementado y 4 Gestionado. El porcentaje se calcula de forma determinística como `suma(madurez × peso) / suma(4 × peso) × 100`. Las preguntas sin respuesta aportan cero y permanecen visibles en el conteo. La brecha es la diferencia positiva contra el perfil objetivo. Los resultados se agrupan por función y categoría. Esto es una autoevaluación asistida y no constituye certificación NIST.
+Para el proyecto académico, la evaluación debe hacerse sobre el escenario educativo, conectar resultados con activos y riesgos de `docs/sgsi/04-riesgos.csv` y seleccionar controles de `docs/sgsi/06-controles.csv`. Los valores demo de la plataforma no demuestran madurez real de UFVV.
+
+NIST CSF 2.0 aporta resultados y taxonomía; NIST SP 800-30 Rev. 1 proporciona el método de evaluación de riesgos y NIST SP 800-207 guía Zero Trust. La metodología y referencias se detallan en [la matriz de riesgos](sgsi/04-riesgos.csv), [OCTAVE Allegro](sgsi/05-octave-allegro.md) y [discusión académica](sgsi/11-discusion-y-referencias.md).

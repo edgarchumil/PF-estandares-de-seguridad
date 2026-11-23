@@ -1,1 +1,1 @@
-"""SecureCommerce Advisor backend."""
+"""SGSI-UFVV backend."""

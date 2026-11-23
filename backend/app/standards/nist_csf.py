@@ -103,7 +103,7 @@ async def seed_nist_csf(db: AsyncSession) -> Framework:
         code="NIST-CSF",
         name="NIST Cybersecurity Framework",
         version="2.0",
-        description="Catálogo inicial adaptado a MIPYMES guatemaltecas.",
+        description="Catálogo inicial adaptado a una universidad ficticia guatemalteca.",
     )
     db.add(framework)
     await db.flush()

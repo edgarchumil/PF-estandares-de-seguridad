@@ -1,11 +1,19 @@
-# Arquitectura
+# Arquitectura de SGSI-UFVV
 
-El MVP usa un monolito modular: navegador → Nginx → React/FastAPI → PostgreSQL, con Redis y Celery para trabajo asíncrono. La API se versiona bajo `/api/v1`. PostgreSQL y Redis permanecen en una red interna de Compose.
+## Entorno local real
 
-La separación modular prepara aislamiento multiempresa, RBAC, motor determinístico de riesgos, adaptadores de IA y almacenamiento compatible con S3. AWS ECS/Fargate, RDS, S3, KMS, Secrets Manager, CloudFront y WAF son el destino de producción previsto. Kubernetes queda fuera del MVP.
+El prototipo ejecutable usa Nginx como puerta de entrada a React y FastAPI. PostgreSQL y Redis viven en una red interna de Docker Compose. Celery ejecuta tareas de reportes. Esta separación es útil para el laboratorio, pero no implementa VLAN de campus, NGFW, DMZ física, alta disponibilidad ni zero trust de extremo a extremo.
 
-## Aislamiento multiempresa
+## Arquitectura objetivo
 
-La aplicación usa una URL compartida y resuelve el contexto empresarial durante la autenticación. `Membership` relaciona usuarios, organizaciones y roles. El token de acceso contiene el identificador de organización y cada repositorio filtra sus consultas por ese valor. Las sesiones persistentes también conservan la organización seleccionada para evitar cambios de contexto durante la renovación.
+La propuesta educativa combina los servicios académicos y bases de datos del campus con una copia externa cifrada en Azure Blob. El campus inicia carga HTTPS 443 autenticada por Microsoft Entra; el contenedor es privado, con RBAC en alcance de contenedor, TLS mínimo 1.2, bloqueo de Shared Key, cifrado de servicio, versionado y retención lógica. La plantilla de [`infrastructure/azure`](../infrastructure/azure) crea únicamente Storage Account y container. No se ha desplegado; requiere una sesión de Azure del titular y consume crédito de Azure for Students.
 
-Los usuarios con varias membresías reciben una selección explícita antes de acceder y pueden cambiar de organización desde la aplicación. Los superadministradores de plataforma se identifican mediante `User.is_superadmin`; esta capacidad no elimina el filtro empresarial de los módulos operativos.
+Las decisiones, flujos, VLAN de destino y límites de costos están en el [diseño híbrido](sgsi/01-arquitectura-hibrida.md) y el [plan Azure](sgsi/plan-azure.md). El [escenario institucional](sgsi/00-escenario-y-alcance.md) describe UFVV y el alcance propuesto.
+
+## Límites conocidos
+
+- El runtime actual ejecutable es Docker local. No hay infraestructura Azure aplicada ni red híbrida privada.
+- El control de acceso de aplicación usa roles y filtros multi organización; MFA TOTP está disponible, no impuesta globalmente.
+- La auditoría de la aplicación no equivale a SIEM. MDM, DLP, EDR/XDR, NGFW e IDS/IPS no están conectados al repo.
+- La cuenta de Azure y un contenedor sirven para copia externa; no ofrecen una nube de recuperación de cómputo de alta disponibilidad.
+- La configuración de producción debe incorporar revisión legal de región, cifrado, retención, costos y permisos antes de datos reales.

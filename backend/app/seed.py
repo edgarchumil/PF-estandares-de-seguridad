@@ -30,9 +30,9 @@ from app.security.passwords import hash_password
 from app.standards.nist_csf import seed_nist_csf
 
 DEMO_USERS = (
-    ("administrador@demo.local", "Administración Demo", RoleCode.ORG_ADMIN),
-    ("analista@demo.local", "Analista Demo", RoleCode.ANALYST),
-    ("consulta@demo.local", "Consulta Demo", RoleCode.VIEWER),
+    ("administrador@demo.local", "Responsable SGSI", RoleCode.ORG_ADMIN),
+    ("analista@demo.local", "Analista de Seguridad TI", RoleCode.ANALYST),
+    ("consulta@demo.local", "Auditor Académico", RoleCode.VIEWER),
 )
 
 
@@ -43,14 +43,14 @@ async def seed() -> None:
     async with SessionFactory() as db:
         framework = await seed_nist_csf(db)
         organization = await db.scalar(
-            select(Organization).where(Organization.slug == "comercializadora-maya")
+            select(Organization).where(Organization.slug == "universidad-ficticia-valle-verde")
         )
         if organization is None:
             organization = Organization(
-                name="Comercializadora Maya, S.A.",
-                slug="comercializadora-maya",
-                sector="Comercio",
-                size="Pequeña empresa",
+                name="Universidad Ficticia del Valle Verde (UFVV)",
+                slug="universidad-ficticia-valle-verde",
+                sector="Educación superior",
+                size="4,500 estudiantes y 450 colaboradores (supuesto académico)",
                 country="GT",
             )
             db.add(organization)
@@ -83,14 +83,14 @@ async def seed() -> None:
                     )
                 )
         second_organization = await db.scalar(
-            select(Organization).where(Organization.slug == "servicios-del-lago")
+            select(Organization).where(Organization.slug == "facultad-ciencias-tecnologia-demo")
         )
         if second_organization is None:
             second_organization = Organization(
-                name="Servicios del Lago, S.A.",
-                slug="servicios-del-lago",
-                sector="Servicios profesionales",
-                size="Microempresa",
+                name="Facultad de Ciencias y Tecnología (campus de demostración)",
+                slug="facultad-ciencias-tecnologia-demo",
+                sector="Educación superior",
+                size="Campus universitario (supuesto académico)",
                 country="GT",
             )
             db.add(second_organization)
@@ -112,13 +112,14 @@ async def seed() -> None:
                 )
             )
         demo_assets = (
-            ("Servidor de facturación", "SRV-FACT-01", AssetType.SERVER, 5),
-            ("Computadora de gerencia", "PC-GER-01", AssetType.COMPUTER, 4),
-            ("Router principal", "NET-RTR-01", AssetType.NETWORK, 5),
-            ("Base de datos de clientes", "DB-CLI-01", AssetType.DATABASE, 5),
-            ("Correo corporativo", "APP-MAIL-01", AssetType.CLOUD_SERVICE, 4),
-            ("Sitio web de comercio electrónico", "APP-WEB-01", AssetType.APPLICATION, 5),
-            ("Servicio de almacenamiento en la nube", "CLD-STO-01", AssetType.CLOUD_SERVICE, 4),
+            ("Correo y colaboración institucional", "APP-MAIL-01", AssetType.APPLICATION, 5),
+            ("Sistema de información estudiantil", "APP-SIS-01", AssetType.APPLICATION, 5),
+            ("Estación de trabajo de Registro Académico", "PC-REG-01", AssetType.COMPUTER, 4),
+            ("Firewall perimetral del campus", "NET-FW-01", AssetType.NETWORK, 5),
+            ("Base de datos de expedientes y calificaciones", "DB-EST-01", AssetType.DATABASE, 5),
+            ("Servicio institucional de identidad", "APP-ID-01", AssetType.CLOUD_SERVICE, 5),
+            ("Plataforma virtual de aprendizaje", "APP-LMS-01", AssetType.APPLICATION, 5),
+            ("Repositorio cifrado de respaldos Azure", "CLD-BKP-01", AssetType.CLOUD_SERVICE, 5),
         )
         for name, code, asset_type, criticality in demo_assets:
             exists = await db.scalar(
@@ -150,30 +151,30 @@ async def seed() -> None:
         threat = await db.scalar(
             select(Threat).where(
                 Threat.organization_id == organization.id,
-                Threat.name == "Campaña de phishing",
+                Threat.name == "Phishing dirigido a cuentas de docentes",
             )
         )
         if threat is None:
             threat = Threat(
                 organization_id=organization.id,
                 created_by=creator.id,
-                name="Campaña de phishing",
-                description="Amenaza ficticia de suplantación dirigida al personal.",
+                name="Phishing dirigido a cuentas de docentes",
+                description="Escenario ficticio de robo de credenciales institucionales.",
                 likelihood=4,
             )
             db.add(threat)
         vulnerability = await db.scalar(
             select(Vulnerability).where(
                 Vulnerability.organization_id == organization.id,
-                Vulnerability.name == "MFA pendiente",
+                Vulnerability.name == "MFA no exigida a cuentas privilegiadas",
             )
         )
         if vulnerability is None:
             vulnerability = Vulnerability(
                 organization_id=organization.id,
                 created_by=creator.id,
-                name="MFA pendiente",
-                description="Cuentas ficticias sin segundo factor habilitado.",
+                name="MFA no exigida a cuentas privilegiadas",
+                description="Supuesto académico: acceso de alto impacto sin segundo factor obligatorio.",
                 severity=4,
             )
             db.add(vulnerability)
@@ -196,8 +197,8 @@ async def seed() -> None:
                 organization_id=organization.id,
                 created_by=creator.id,
                 code="RSK-DEMO-001",
-                title="Compromiso de correo por phishing",
-                description="Escenario ficticio para demostrar priorización y tratamiento.",
+                title="Compromiso de cuenta docente mediante phishing",
+                description="Escenario ficticio para demostrar priorización y tratamiento en la UFVV.",
                 asset_id=mail_asset.id,
                 threat_id=threat.id,
                 vulnerability_id=vulnerability.id,
@@ -247,8 +248,8 @@ async def seed() -> None:
                 organization_id=organization.id,
                 created_by=creator.id,
                 framework_id=framework.id,
-                code="NIST-DEMO-2026",
-                name="Evaluación NIST de demostración",
+                code="UFVV-NIST-2026",
+                name="Evaluación NIST CSF 2.0 de la UFVV",
                 scope="Toda la organización; datos exclusivamente ficticios.",
                 target_maturity=3,
                 comments="Evaluación ficticia para explorar el MVP.",
@@ -298,10 +299,8 @@ async def seed() -> None:
                 Incident(
                     organization_id=organization.id,
                     created_by=creator.id,
-                    title="Intento de acceso sospechoso (demostración)",
-                    description=(
-                        "Evento completamente ficticio para explorar el seguimiento de incidentes."
-                    ),
+                    title="Intento de acceso sospechoso a expediente estudiantil (demostración)",
+                    description="Evento ficticio para demostrar la gestión universitaria de incidentes.",
                     severity=IncidentSeverity.MEDIUM,
                     occurred_at=datetime.now(UTC),
                 )

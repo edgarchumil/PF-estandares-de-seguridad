@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     app_env: str = "development"
-    app_name: str = "SecureCommerce Advisor"
+    app_name: str = "SGSI-UFVV"
     api_v1_prefix: str = "/api/v1"
     log_level: str = "INFO"
     secret_key: str = Field(default="development-only-secret-change-me-12345", min_length=32)
