@@ -58,7 +58,7 @@ export function AssetsPage() {
               Activos tecnológicos
             </h1>
             <p className="mt-2 text-slate-600">
-              Registre lo que su empresa necesita proteger.
+              Registre los activos que su universidad necesita proteger.
             </p>
           </div>
           <Link

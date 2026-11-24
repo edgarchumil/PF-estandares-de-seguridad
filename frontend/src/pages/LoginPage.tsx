@@ -100,13 +100,13 @@ export function LoginPage() {
       <section className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-7 shadow-sm">
         <div className="flex items-center gap-3 text-blue-950">
           <span className="rounded-xl bg-blue-950 p-2 text-white"><ShieldCheck aria-hidden="true" /></span>
-          <div><h1 className="text-xl font-bold">Iniciar sesión</h1><p className="text-sm text-slate-600">SGSI-UFVV · Universidad Ficticia del Valle Verde</p></div>
+          <div><h1 className="text-xl font-bold">Iniciar sesión</h1><p className="text-sm text-slate-600">Centro de Gestión de Seguridad de la Información (CGSI)</p><p className="text-xs text-slate-500">Universidad Ficticia del Valle Verde</p></div>
         </div>
         {organizations.length > 0 ? <div className="mt-7 space-y-3">
-          <p className="font-semibold text-blue-950">Seleccione la empresa</p>
-          <p className="text-sm text-slate-600">Su cuenta pertenece a más de una organización.</p>
+          <p className="font-semibold text-blue-950">Seleccione la universidad</p>
+          <p className="text-sm text-slate-600">Su cuenta tiene acceso a más de una universidad.</p>
           {organizations.map((item) => <button key={item.id} type="button" className="w-full rounded-lg border p-3 text-left hover:border-blue-500" onClick={() => void chooseOrganization(item.id)}><strong className="block">{item.name}</strong><span className="text-sm text-slate-500">{item.slug} · {item.role_code}</span></button>)}
-          {adminOrganization && <button type="button" disabled={openingRegistration} className="w-full rounded-lg bg-blue-950 px-4 py-3 font-semibold text-white hover:bg-blue-900 disabled:opacity-60" onClick={() => void openRegistration()}>{openingRegistration ? 'Verificando permisos…' : 'Registrar una empresa'}</button>}
+          {adminOrganization && <button type="button" disabled={openingRegistration} className="w-full rounded-lg bg-blue-950 px-4 py-3 font-semibold text-white hover:bg-blue-900 disabled:opacity-60" onClick={() => void openRegistration()}>{openingRegistration ? 'Verificando permisos…' : 'Registrar una universidad'}</button>}
           <button type="button" className="text-sm text-blue-700" onClick={() => { setOrganizations([]); setPendingValues(null) }}>Usar otra cuenta</button>
           {serverError && <p role="alert" className="text-sm text-red-800">{serverError}</p>}
         </div> : <form className="mt-7 space-y-5" onSubmit={handleSubmit(submit)} noValidate>

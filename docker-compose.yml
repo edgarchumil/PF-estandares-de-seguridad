@@ -61,7 +61,7 @@ services:
       target: runtime
     environment: &backend-environment
       APP_ENV: ${APP_ENV:-development}
-      APP_NAME: ${APP_NAME:-SGSI-UFVV}
+      APP_NAME: ${APP_NAME:-CGSI}
       API_V1_PREFIX: ${API_V1_PREFIX:-/api/v1}
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       SECRET_KEY: ${SECRET_KEY:-development-only-secret-change-me-12345}

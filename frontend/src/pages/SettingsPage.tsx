@@ -6,7 +6,7 @@ const labels = { low: 'Bajo', medium: 'Medio', high: 'Alto', critical: 'Crítico
 
 export function SettingsPage() {
   const bands = useQuery({ queryKey: ['risk-bands'], queryFn: getRiskBands })
-  return <Page title="Configuración" description="Parámetros operativos de la empresa seleccionada.">
+  return <Page title="Configuración" description="Parámetros operativos de la universidad seleccionada.">
     <section className="max-w-2xl rounded-xl border bg-white p-5">
       <h2 className="font-semibold text-blue-950">Clasificación de riesgo</h2>
       {bands.isPending && <p className="mt-3">Cargando escala…</p>}

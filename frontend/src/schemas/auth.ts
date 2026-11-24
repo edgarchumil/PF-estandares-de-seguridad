@@ -23,7 +23,7 @@ export const registerSchema = z.object({
   full_name: z.string().min(2, 'Ingrese su nombre'),
   email: z.string().email('Ingrese un correo válido'),
   password: z.string().min(12, 'Use al menos 12 caracteres'),
-  organization_name: z.string().min(2, 'Ingrese el nombre de la empresa'),
+  organization_name: z.string().min(2, 'Ingrese el nombre de la universidad'),
   organization_slug: z.string()
     .transform(normalizeOrganizationSlug)
     .pipe(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Ingrese un nombre o sitio web válido')),

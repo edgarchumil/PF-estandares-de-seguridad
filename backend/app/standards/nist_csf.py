@@ -25,7 +25,7 @@ CATALOG = (
         "Contexto organizacional",
         "GV.OC-01",
         "Contexto de seguridad",
-        "¿La empresa documenta sus objetivos de ciberseguridad y responsables?",
+        "¿La universidad documenta sus objetivos de ciberseguridad y responsables?",
         "Defina responsables y relacione la seguridad con las necesidades del negocio.",
         "Política, organigrama o acta de asignación.",
         "Documente objetivos y responsables de ciberseguridad.",

@@ -21,7 +21,7 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 app = FastAPI(
     title=settings.app_name,
     version="0.1.0",
-    description="Portal SGSI para la Universidad Ficticia del Valle Verde.",
+    description="Centro de Gestión de Seguridad de la Información (CGSI) de la Universidad Ficticia del Valle Verde.",
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan,

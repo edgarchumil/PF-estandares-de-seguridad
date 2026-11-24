@@ -1,6 +1,6 @@
 # Diseño del Sistema de Gestión de Seguridad de la Información de la Universidad Ficticia del Valle Verde
 
-**Sistema:** SGSI-UFVV  
+**Sistema:** Centro de Gestión de Seguridad de la Información (CGSI)
 **Versión:** 1.0 · 23 de noviembre de 2026  
 **Tipo de trabajo:** diseño académico con prototipo local y preparación de arquitectura híbrida  
 **Autor/equipo:** completar por el estudiante  
@@ -22,7 +22,7 @@ Los análisis entregables incluyen inventario de 20 activos, BIA de 10 procesos,
 
 La universidad depende de servicios digitales para inscripción, calificaciones, clases, identidad, investigación y pagos. La interrupción de estos servicios puede afectar la continuidad académica y la confidencialidad de información personal. La adopción de una herramienta técnica aislada no sustituye gobierno, asignación de responsabilidades, evaluación de impacto, tratamiento de riesgos ni mejora continua.
 
-Este trabajo define un sistema de gestión aplicable al caso académico, adapta el prototipo SecureCommerce heredado a SGSI-UFVV y organiza los documentos necesarios para evaluar riesgos, escoger controles, proponer continuidad y preparar una arquitectura híbrida de bajo costo. Las decisiones basadas en supuestos están identificadas para evitar presentarlas como hechos verificados.
+Este trabajo define un sistema de gestión aplicable al caso académico, adapta el prototipo SecureCommerce heredado al Centro de Gestión de Seguridad de la Información (CGSI) y organiza los documentos necesarios para evaluar riesgos, escoger controles, proponer continuidad y preparar una arquitectura híbrida de bajo costo. Las decisiones basadas en supuestos están identificadas para evitar presentarlas como hechos verificados.
 
 ## 2. Objetivos y alcance
 
@@ -55,7 +55,7 @@ UFVV se define como universidad privada ficticia de dos sedes. La Rectoría patr
 
 La clasificación propuesta es pública, interna, confidencial y restringida. Los registros académicos y las credenciales se consideran restringidos; procedimientos internos y telemetría se protegen según contenido. La matriz de inventario contiene 20 activos, incluidos SIS, LMS, directorio, base de datos académica, estaciones administrativas, red, respaldos, biblioteca digital y proveedor de pagos. Cada propietario debe validar clasificación, retención, dependencias y acceso.
 
-El prototipo ofrece módulos de inventario, evaluación NIST, riesgos, incidentes, auditoría y reportes. El seed cambia el tenant de demostración a UFVV. Una base de datos en volumen previo puede conservar el tenant histórico y registros ya creados; no se eliminó el volumen para evitar pérdida de datos locales.
+El prototipo ofrece módulos de inventario, evaluación NIST, riesgos, incidentes, auditoría y reportes. El seed crea o actualiza UFVV y conserva las demás organizaciones registradas como tenants independientes. El selector muestra las organizaciones activas para las que la cuenta tiene membresía; tras la carga se debe cerrar sesión y volver a ingresar para renovar la lista.
 
 ## 5. Arquitectura híbrida propuesta
 
@@ -125,7 +125,7 @@ La matriz P×I es sencilla y auditable para un proyecto de curso, pero no sustit
 
 Para Guatemala se recomienda revisión legal de datos personales y transferencias antes de operar. Las referencias consultadas sobre iniciativas legislativas muestran propuestas registradas/debatidas, no permiten concluir una obligación legal vigente en este proyecto; validar estado actualizado con fuentes oficiales y asesoría local antes de implementación. ISO y TIA son fuentes protegidas; el proyecto no reproduce los textos normativos completos ni pretende certificación.
 
-El trabajo deja una linea base academica coherente y un prototipo local reidentificado como SGSI-UFVV, matrices de BIA/riesgo/controles, politicas, gobierno, continuidad, IaC y procedimientos de evidencia. La prioridad es materializar evidencia autentica: restauracion y tiempos, configuracion observada, pruebas de control, aprobacion institucional, elegibilidad/costo cero y ejercicio de continuidad. Hasta entonces, el estado es disenado o preparado, no certificado ni totalmente implementado.
+El trabajo deja una linea base academica coherente y un prototipo local denominado Centro de Gestión de Seguridad de la Información (CGSI), matrices de BIA/riesgo/controles, politicas, gobierno, continuidad, IaC y procedimientos de evidencia. La prioridad es materializar evidencia autentica: restauracion y tiempos, configuracion observada, pruebas de control, aprobacion institucional, elegibilidad/costo cero y ejercicio de continuidad. Hasta entonces, el estado es disenado o preparado, no certificado ni totalmente implementado.
 
 ## Referencias
 

@@ -1,6 +1,6 @@
-# SGSI-UFVV
+# Centro de Gestión de Seguridad de la Información (CGSI)
 
-**Proyecto académico:** Diseño e implementación demostrable del Sistema de Gestión de Seguridad de la Información de la Universidad Ficticia del Valle Verde (UFVV).
+**Proyecto académico:** Diseño e implementación demostrable del Centro de Gestión de Seguridad de la Información (CGSI) para la Universidad Ficticia del Valle Verde (UFVV).
 
 UFVV es una organización universitaria ficticia en Guatemala. Los nombres, población, procesos, activos, impactos, riesgos y tiempos son supuestos académicos, no una organización ni auditoría real. El sistema usa una aplicación local de gestión de activos, NIST CSF, riesgos, incidentes y auditoría; el paquete completo de diseño y entregables está en [`docs/sgsi`](docs/sgsi/README.md).
 
@@ -22,7 +22,7 @@ docker compose run --rm api python -m app.seed
 - Readiness: <http://localhost:8080/api/v1/health/ready>
 - Acceso demo: `administrador@demo.local`, con el valor local de `DEMO_PASSWORD`.
 
-En una base persistente heredada, la carga educativa agrega el tenant UFVV y no borra el tenant anterior. Seleccione **Universidad Ficticia del Valle Verde (UFVV)** en el selector. No ejecute `docker compose down -v` si desea conservar la información local.
+En una base persistente heredada, la carga educativa crea o actualiza el tenant **Universidad Ficticia del Valle Verde (UFVV)** y conserva las demás organizaciones registradas. El selector muestra las organizaciones activas con membresía para la cuenta; cada organización conserva sus datos aislados por tenant. Tras ejecutar el seed, cierre sesión y vuelva a ingresar con `administrador@demo.local`. No ejecute `docker compose down -v` si desea conservar la información local.
 
 Detener: `docker compose down`. PostgreSQL, Redis y respaldos se mantienen en volúmenes locales.
 
@@ -65,4 +65,4 @@ python -m uvicorn app.main:app --app-dir backend --reload --port 8001
 
 En otra terminal: `cd frontend`, `npm ci`, `npm run dev`. Para credenciales, base, migraciones y ejecución completa use Docker Compose.
 
-La aplicación heredada tenía una empresa demo y material TecnoMarket. Los documentos históricos de importación y capturas no se consideran evidencia de los controles educativos. Las matrices de esta versión son supuestos de proyecto y deben validarse antes de presentarse como resultados medidos.
+La aplicación heredada incluye tenants comerciales y universitarios de demostración. Se conservan como organizaciones independientes; sus registros no se consideran evidencia de los controles educativos de la UFVV. La UFVV es ficticia y no se procesan datos personales reales. Las matrices de esta versión son supuestos de proyecto y deben validarse antes de presentarse como resultados medidos.

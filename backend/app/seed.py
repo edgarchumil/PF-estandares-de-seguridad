@@ -55,6 +55,9 @@ async def seed() -> None:
             )
             db.add(organization)
             await db.flush()
+
+        # Preserve existing organizations as separate tenants. The selector lists
+        # the active organizations for which the user has an active membership.
         for email, full_name, role in DEMO_USERS:
             user = await db.scalar(select(User).where(User.email == email))
             if user is None:
@@ -68,6 +71,10 @@ async def seed() -> None:
                 await db.flush()
             if email == "administrador@demo.local":
                 user.is_superadmin = True
+                user.is_active = True
+                user.password_hash = hash_password(password)
+                user.failed_login_attempts = 0
+                user.locked_until = None
             membership = await db.scalar(
                 select(Membership).where(
                     Membership.organization_id == organization.id,
@@ -82,35 +89,8 @@ async def seed() -> None:
                         role_code=role,
                     )
                 )
-        second_organization = await db.scalar(
-            select(Organization).where(Organization.slug == "facultad-ciencias-tecnologia-demo")
-        )
-        if second_organization is None:
-            second_organization = Organization(
-                name="Facultad de Ciencias y Tecnología (campus de demostración)",
-                slug="facultad-ciencias-tecnologia-demo",
-                sector="Educación superior",
-                size="Campus universitario (supuesto académico)",
-                country="GT",
-            )
-            db.add(second_organization)
-            await db.flush()
         creator = await db.scalar(select(User).where(User.email == "administrador@demo.local"))
         assert creator is not None
-        second_membership = await db.scalar(
-            select(Membership).where(
-                Membership.organization_id == second_organization.id,
-                Membership.user_id == creator.id,
-            )
-        )
-        if second_membership is None:
-            db.add(
-                Membership(
-                    organization_id=second_organization.id,
-                    user_id=creator.id,
-                    role_code=RoleCode.ORG_ADMIN,
-                )
-            )
         demo_assets = (
             ("Correo y colaboración institucional", "APP-MAIL-01", AssetType.APPLICATION, 5),
             ("Sistema de información estudiantil", "APP-SIS-01", AssetType.APPLICATION, 5),
@@ -232,7 +212,7 @@ async def seed() -> None:
         demo_evaluation = await db.scalar(
             select(Evaluation).where(
                 Evaluation.organization_id == organization.id,
-                Evaluation.code == "NIST-DEMO-2026",
+                Evaluation.code == "UFVV-NIST-2026",
                 Evaluation.version == 1,
             )
         )

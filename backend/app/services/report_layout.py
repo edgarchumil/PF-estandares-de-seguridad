@@ -201,7 +201,7 @@ def build_pdf(path: Path, report_type: str, data: dict[str, Any]) -> None:
     if profile:
         story.extend(
             [
-                p("Perfil de la empresa", "section"),
+                p("Perfil de la universidad", "section"),
                 table(
                     ["Sector", "Tamaño", "País", "Identificador"],
                     [
@@ -428,7 +428,7 @@ def build_pdf(path: Path, report_type: str, data: dict[str, Any]) -> None:
             [
                 p("Trazabilidad y lectura del informe", "section"),
                 p(
-                    "Fuente: registros de la empresa seleccionada al generar el documento, excluyendo eliminados. El alcance declarado es descriptivo y no filtra los datos. Los campos faltantes se indican como «No registrado».",
+                    "Fuente: registros de la universidad seleccionada al generar el documento, excluyendo eliminados. El alcance declarado es descriptivo y no filtra los datos. Los campos faltantes se indican como «No registrado».",
                     "small",
                 ),
                 p(

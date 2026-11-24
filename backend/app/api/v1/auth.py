@@ -148,7 +148,7 @@ async def login(
 ) -> TokenResponse:
     user = await db.scalar(
         select(User)
-        .options(selectinload(User.memberships))
+        .options(selectinload(User.memberships).selectinload(Membership.organization))
         .where(User.email == payload.email.lower(), User.deleted_at.is_(None))
     )
     now = utc_now()
@@ -164,7 +164,12 @@ async def login(
         await db.commit()
         raise HTTPException(status_code=401, detail=GENERIC_LOGIN_ERROR)
     active_memberships = [
-        item for item in user.memberships if item.is_active and item.deleted_at is None
+        item
+        for item in user.memberships
+        if item.is_active
+        and item.deleted_at is None
+        and item.organization.is_active
+        and item.organization.deleted_at is None
     ]
     if user.mfa_enabled and (
         not payload.mfa_code

@@ -1,4 +1,4 @@
-# SGSI-UFVV
+# Centro de Gestión de Seguridad de la Información (CGSI)
 
 Paquete académico para el diseño e implementación demostrable del Sistema de Gestión de Seguridad de la Información de la **Universidad Ficticia del Valle Verde (UFVV)**. Todos los datos de la universidad, personas, procesos, activos, costos y riesgos son supuestos para el proyecto; no describen una entidad real ni una auditoría.
 

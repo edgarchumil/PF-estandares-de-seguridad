@@ -1,4 +1,4 @@
-# Presentación: SGSI-UFVV
+# Presentación: Centro de Gestión de Seguridad de la Información (CGSI)
 
 **Duración sugerida:** 8–10 minutos · **10 diapositivas**  
 Personalizar portada con autor/equipo, curso, docente y fecha de entrega.
@@ -6,7 +6,7 @@ Personalizar portada con autor/equipo, curso, docente y fecha de entrega.
 ## 1. Portada
 
 **Diseño e implementación académica de un SGSI**  
-Universidad Ficticia del Valle Verde · SGSI-UFVV  
+Universidad Ficticia del Valle Verde · Centro de Gestión de Seguridad de la Información (CGSI)
 Autor/equipo · Curso · Docente · Fecha
 
 ## 2. Problema y contexto
