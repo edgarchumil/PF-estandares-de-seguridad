@@ -4,19 +4,19 @@ El perfil Compose `backup` crea una copia cifrada de PostgreSQL y de los reporte
 
 ## Operación local
 
-Configure `BACKUP_ENCRYPTION_KEY` de al menos 32 caracteres aleatorios en `.env` y no la almacene en Git. Inicie el perfil opcional:
+Mantenga la clave de cifrado en `.secrets/backup-encryption.env`, excluida de Git, con al menos 32 caracteres aleatorios. Para invocar Compose use ambos archivos de entorno, en este orden, para que la clave aleatoria reemplace cualquier valor de ejemplo en `.env`:
 
 ```powershell
-docker compose --profile backup up -d backup
-docker compose logs backup
+docker compose --env-file .env --env-file .secrets/backup-encryption.env --profile backup up -d backup
+docker compose --profile backup logs backup
 ```
 
 Para copia única, verificar hash y listar archivo:
 
 ```powershell
-docker compose --profile backup run --rm -e BACKUP_RUN_ONCE=true backup
-docker compose --profile backup run --rm --entrypoint sh backup -c "ls -lh /backups"
-docker compose --profile backup run --rm --entrypoint /usr/local/bin/verify.sh `
+docker compose --env-file .env --env-file .secrets/backup-encryption.env --profile backup run --rm -e BACKUP_RUN_ONCE=true backup
+docker compose --env-file .env --env-file .secrets/backup-encryption.env --profile backup run --rm --entrypoint sh backup -c "ls -lh /backups"
+docker compose --env-file .env --env-file .secrets/backup-encryption.env --profile backup run --rm --entrypoint /usr/local/bin/verify.sh `
   -e BACKUP_FILE=/backups/sgsi-ufvv-FECHA.tar.enc backup
 ```
 
@@ -24,7 +24,7 @@ Restauración sobrescribe la base objetivo. Trabaje sobre un proyecto Compose ai
 
 ## Réplica Azure
 
-El plan y scripts están en `infrastructure/azure` y `docs/sgsi/plan-azure.md`. Requieren que el titular se autentique en su Azure for Students y ejecute el despliegue interactivo. Cargue solo el `.tar.enc` y su manifiesto `.sha256` con `upload-backup.ps1`. Descargue y verifique en entorno aislado antes de declarar que la copia externa se puede restaurar. Mantenga activo spending limit; Azure Blob consume crédito y la retención genera almacenamiento.
+El plan y scripts están en `infrastructure/azure` y `docs/sgsi/plan-azure.md`. El 24-11-2026 se cargaron al contenedor privado `sgsi-backups` una copia cifrada de demostración y su manifiesto `.sha256` mediante el portal de Azure. La verificación del hash se hizo sobre el archivo local; falta descargar la copia remota y ensayar restauración aislada. Mantenga activo spending limit y revise los medidores de Blob; el archivo ocupa almacenamiento mientras permanezca en la cuenta.
 
 ## Registro de prueba
 

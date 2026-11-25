@@ -4,7 +4,7 @@
 
 Se mantiene el procesamiento principal en un laboratorio local que representa la sala de servidores del campus. La aplicación, PostgreSQL, Redis, almacenamiento de reportes y registros operativos viven en Docker Compose dentro de una red no expuesta directamente. Azure se utiliza para una copia externa cifrada de los respaldos y para un punto de recuperación de demostración activado bajo demanda. Así se conserva control local sobre el sistema académico y se añade una copia fuera del sitio sin mantener una máquina virtual o una VPN facturándose todo el mes.
 
-La propuesta usa Azure for Students por el contexto académico y porque el titular reporta disponer de acceso educativo. El código incluido provisiona solamente un grupo de recursos, una cuenta de almacenamiento y un contenedor privado; no se ha desplegado. El acceso cloud a datos se limita a HTTPS saliente con Microsoft Entra y RBAC. El plan de costos está separado en [plan-azure.md](plan-azure.md).
+La propuesta usa una suscripción de prueba gratuita de Azure. El portal confirmó cuotas gratuitas para Blob Hot LRS, sin autorizar el consumo del crédito promocional ni una actualización a pago por uso. El 24 de noviembre de 2026 se desplegó un grupo de recursos, una cuenta de almacenamiento y un contenedor privado. La suscripción de prueba vence antes que la cuota de Storage; el respaldo cloud será temporal si no se aprueba una alternativa para mantener la suscripción. El acceso a datos se limita a HTTPS con Microsoft Entra y RBAC. El plan de costos está separado en [plan-azure.md](plan-azure.md).
 
 ## Diagrama lógico
 
@@ -66,7 +66,7 @@ Flujos requeridos: (1) usuario→Nginx 443; (2) Nginx→API 8000 en red interna 
 | Identidad | Roles por función, TOTP MFA; Entra para el operador Azure | Roles/MFA opcional en el sistema; Entra/RBAC en plantilla Azure |
 | Red | NGFW, IDS/IPS, VLAN y DMZ con denegación por omisión | Diseño; la red Compose es segregación de contenedores limitada |
 | Monitoreo | Wazuh/Suricata para laboratorio, eventos de API y SO | No desplegado en el Compose de base |
-| Respaldo | Copia local cifrada y réplica externa Blob | Script local existente; plantilla cloud y carga preparados |
+| Respaldo | Copia local cifrada y réplica externa Blob | Respaldo de demostración cargado al contenedor privado; pendiente validar descarga y restauración |
 | Alta disponibilidad | 2 hosts, PSU/UPS redundante y réplica de aplicación | Objetivo de diseño; no presente en el equipo local |
 | Móvil | MDM, MFA y acceso por aplicación | Política; requiere licencias y enrolamiento reales |
 

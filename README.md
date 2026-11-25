@@ -44,9 +44,9 @@ El paquete distingue capacidades de la aplicación, plantillas de despliegue, co
 
 ## Nube Azure de costo limitado
 
-La arquitectura mantiene computo y bases en el laboratorio y prepara una copia cifrada Azure Blob solo si la suscripcion confirma cuota gratuita disponible. El titular puede ejecutar [`storage.bicep`](infrastructure/azure/storage.bicep) con [`deploy-storage.ps1`](infrastructure/azure/deploy-storage.ps1) y cargar un `.tar.enc` con [`upload-backup.ps1`](infrastructure/azure/upload-backup.ps1).
+La arquitectura mantiene computo y bases en el laboratorio. La cuenta Azure Blob privada ya está desplegada dentro de la cuota gratuita confirmada. El 24 de noviembre de 2026 se cargaron al contenedor privado un respaldo cifrado de demostración de SecureCommerce (`.tar.enc`, 179.03 KiB) y su manifiesto SHA-256 (115 B). El hash local se verificó antes de la carga; la restauración remota todavía no se ha probado. El script [`upload-backup.ps1`](infrastructure/azure/upload-backup.ps1) carga solo un `.tar.enc` con su SHA-256 y limita el contenedor a 4.5 GB.
 
-Azure for Students publica cuotas gratuitas por servicio y periodo; el nivel gratuito de Blob debe confirmarse en el portal para esta cuenta antes de desplegar. El plan no autoriza a consumir creditos: si el recurso queda fuera de cuota gratuita, no desplegarlo. Mantenga el limite de gasto activo y no actualice a pago por uso. Consulte [plan-azure.md](docs/sgsi/plan-azure.md).
+El portal de Azure confirmó cuotas gratuitas para Blob Hot LRS en esta cuenta y el despliegue solo creó recursos cubiertos por esos medidores. El plan no autoriza consumir crédito promocional: supervise los límites y no actualice a pago por uso. La prueba vence el 23 de diciembre de 2026; el almacenamiento será temporal si no hay una alternativa gratuita. Consulte [plan-azure.md](docs/sgsi/plan-azure.md).
 
 No cargue expedientes reales. La región elegida queda fuera de Guatemala y exige revisión legal de datos y transferencia internacional antes de un uso institucional.
 

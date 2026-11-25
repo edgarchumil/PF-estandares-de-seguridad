@@ -28,7 +28,7 @@ Este trabajo define un sistema de gestión aplicable al caso académico, adapta 
 
 ### Objetivo general
 
-Diseñar y preparar la implementación demostrable de un SGSI para los procesos académicos y de apoyo de UFVV, con controles trazables a marcos reconocidos, continuidad de servicios y arquitectura local-híbrida compatible con Azure for Students.
+Diseñar y preparar la implementación demostrable de un SGSI para los procesos académicos y de apoyo de UFVV, con controles trazables a marcos reconocidos, continuidad de servicios y arquitectura local-híbrida con Azure Blob dentro de la cuota gratuita confirmada.
 
 ### Objetivos específicos
 
@@ -61,9 +61,9 @@ El prototipo ofrece módulos de inventario, evaluación NIST, riesgos, incidente
 
 El entorno local usa Docker Compose para frontend/API, worker, PostgreSQL, Redis y perfil opcional de respaldo. La base de datos y Redis permanecen en la red privada de Compose sin publicar puertos de host en el diseño. El perímetro físico se segmentaría en administración, servidores, personal, estudiantes, móviles y visitantes; estas VLAN y reglas son un diseño y no una configuración desplegada.
 
-La arquitectura hibrida propuesta usaria Azure Blob Storage Standard LRS Hot, un contenedor privado, HTTPS/TLS 1.2, acceso anonimo y Shared Key deshabilitados, y acceso OAuth/RBAC. Versionado, retenciones y Change Feed quedan desactivados para limitar operaciones y almacenamiento. La cuota gratuita publicada es de 5 GB LRS Hot, 20,000 lecturas y 10,000 escrituras por mes durante 12 meses para cuentas elegibles nuevas; el titular debe confirmar que su suscripcion califica. La plantilla no se despliega hasta confirmar esa cuota. El script limita carga total a 4.5 GB. La cuenta mantiene endpoint de servicio publico autenticado; no se afirma conectividad privada o VPN.
+La arquitectura híbrida despliega Azure Blob Storage Standard LRS Hot, contenedor privado, HTTPS/TLS 1.2, acceso anónimo y Shared Key deshabilitados, y acceso OAuth/RBAC. Versionado, retenciones y Change Feed quedan desactivados para limitar operaciones y almacenamiento. El portal confirmó 5 GB LRS Hot, 20,000 lecturas y 10,000 escrituras mensuales; el uso era cero antes de la carga y debe revisarse de nuevo en 24–48 horas por la demora de los medidores. El 24 de noviembre de 2026 el portal confirmó que se cargaron al contenedor privado un respaldo cifrado de demostración de SecureCommerce (179.03 KiB) y su manifiesto SHA-256 (115 B). El hash local se verificó antes de transferir; no se ha descargado de Azure ni probado una restauración. El script limita la carga total a 4.5 GB. El endpoint de servicio es público pero autenticado; no se afirma conectividad privada o VPN. La suscripción Free Trial vence el 23 de diciembre de 2026, antes que la cuota de Storage; por ello el almacenamiento cloud es una demostración temporal si no se aprueba una alternativa sin costo para mantener la suscripción.
 
-El diseño excluye VM permanente, VPN Gateway, NAT Gateway, firewall administrado, Private Endpoint, licencias premium y servicios Marketplace. Azure for Students ofrece creditos educativos y algunas cuotas gratuitas con elegibilidad y limites; este proyecto solo autoriza Blob dentro de una cuota que se confirme gratuita en el portal. No consumir creditos para este despliegue. No usar datos reales de estudiantes sin evaluacion, autorizacion y revision de transferencia internacional.
+El diseño excluye VM permanente, VPN Gateway, NAT Gateway, firewall administrado, Private Endpoint, licencias premium y servicios Marketplace. La suscripción observada es una prueba gratuita con crédito promocional y cuota gratis separada. Este proyecto solo autoriza Blob dentro de los medidores gratuitos confirmados; no consumir crédito promocional ni actualizar a pago por uso. No usar datos reales de estudiantes sin evaluación, autorización y revisión de transferencia internacional.
 
 El diagrama de flujos, zonas y controles está en [01-arquitectura-hibrida.md](01-arquitectura-hibrida.md); el plan de costos y pasos operativos está en [plan-azure.md](plan-azure.md).
 
@@ -141,7 +141,9 @@ International Organization for Standardization. (2022c). *ISO/IEC 27005:2022 Gui
 
 ISACA. (2018). *COBIT 2019 framework: Introduction and methodology*. https://www.isaca.org/resources/cobit
 
-Microsoft. (s. f.). *Azure for Students*. Microsoft Learn. https://learn.microsoft.com/azure/education-hub/about-azure-for-students
+Microsoft. (s. f.). *Check usage of free services included with your Azure free account*. Microsoft Learn. https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/check-free-service-usage
+
+Microsoft. (s. f.). *Avoid charges with your Azure free account*. Microsoft Learn. https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/avoid-charges-free-account
 
 National Institute of Standards and Technology. (2012). *Guide for conducting risk assessments* (NIST SP 800-30 Rev. 1). https://doi.org/10.6028/NIST.SP.800-30r1
 

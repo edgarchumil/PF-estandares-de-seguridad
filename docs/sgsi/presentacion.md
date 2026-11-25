@@ -77,9 +77,9 @@ Controles: MFA, mínimo privilegio, parches, segmentación, logs, copias aislada
 - 0–30 días: aprobar alcance, roles, criterios y corrección de respaldo.
 - 31–60 días: despliegue Blob por el propietario, hash y recuperación aislada.
 - 61–90 días: simulacro, métricas, evidencias y reevaluación de riesgo.
-- Azure for Students con límite de gasto; Blob consume créditos y no es gratuito garantizado.
+- Azure Free Trial: Blob Hot LRS está dentro de cuota gratuita confirmada; no consumir crédito promocional. La suscripción de prueba vence antes que el periodo de Storage gratis.
 - Entregables completos como diseño y prototipo; cerrar con pruebas observadas y revisión legal.
 
 ### Referencias breves
 
-ISO/IEC 27001/27002/27005, ISO 22301, NIST CSF 2.0 y SP 800-30, COBIT 2019, ITIL 4, TIA-942-C, Microsoft Azure for Students. Referencias APA y enlaces oficiales en el informe.
+ISO/IEC 27001/27002/27005, ISO 22301, NIST CSF 2.0 y SP 800-30, COBIT 2019, ITIL 4, TIA-942-C y Azure Blob Storage. Referencias APA y enlaces oficiales en el informe.

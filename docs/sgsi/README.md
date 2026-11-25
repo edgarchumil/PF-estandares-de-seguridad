@@ -20,7 +20,7 @@ Paquete académico para el diseño e implementación demostrable del Sistema de 
 | [09-gobierno-y-servicios.md](09-gobierno-y-servicios.md) | Aplicación concreta de COBIT 2019 e ITIL 4 |
 | [10-evidencias-y-estado.md](10-evidencias-y-estado.md) | Registro de evidencia y distinción entre diseño e implementación |
 | [11-discusion-y-referencias.md](11-discusion-y-referencias.md) | Discusión del curso, fuentes y referencias APA 7 |
-| [plan-azure.md](plan-azure.md) | Propuesta de nube de bajo costo y límites de Azure for Students |
+| [plan-azure.md](plan-azure.md) | Plan de Azure Free Trial, cuota Blob gratuita y límites de vigencia |
 
 ## Estado de implementación
 

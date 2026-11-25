@@ -1,12 +1,12 @@
 ﻿# Plan de nube Azure sin gasto de bolsillo
 
-**Consulta:** 23 de noviembre de 2026. **Preferencia:** solo cuotas gratuitas, sin consumir el saldo de creditos. El procesamiento permanece en el equipo local; Azure aporta una copia cifrada en Blob unicamente si el portal confirma una cuota gratuita vigente para esta suscripcion.
+**Consulta:** 24 de noviembre de 2026. **Preferencia:** solo cuotas gratuitas, sin consumir créditos promocionales ni actualizar a pago por uso. El procesamiento permanece en el equipo local; Azure aporta una copia cifrada en Blob dentro de la cuota gratuita confirmada en el portal.
 
 ## Oferta y condicion de uso
 
-Azure for Students anuncia USD 100 de creditos por 12 meses y acceso gratuito a cantidades seleccionadas de servicios. La oferta exige elegibilidad y puede cambiar. La pagina oficial de servicios gratuitos enumera Azure Blob Storage con 5 GB de almacenamiento LRS Hot, 20,000 lecturas y 10,000 escrituras al mes durante 12 meses para cuentas elegibles nuevas. Antes de desplegar, el titular debe verificar que esas cuotas aparezcan en su cuenta y que el recurso este cubierto por el nivel gratuito. No se debe asumir que todo usuario educativo califica.
+La cuenta observada es una prueba gratuita de Azure, no una suscripción Azure Sponsorships activa. En el portal, la tabla **Servicios gratuitos durante 12 meses** confirma para esta suscripción los medidores de Blob Hot LRS: 5 GB de almacenamiento por mes, 20,000 operaciones de lectura y 10,000 de escritura, además de operaciones de lista/creación de contenedor. La captura mostraba uso 0 y vencimiento de la cuota el 23 de diciembre de 2027. La cuota aplica solo dentro de esos límites y su consumo puede tardar hasta 24 horas en reflejarse.
 
-El plan de este proyecto no autoriza a gastar los USD 100 de creditos. Si Azure muestra cargos, saldo de credito consumido o la cuota no esta disponible, no desplegar Blob. Mantener copia local y usar medio externo cifrado de laboratorio mientras se valida una opcion gratuita aprobada por el curso. No cambiar a pago por uso.
+La prueba también muestra crédito promocional con vencimiento el 23 de diciembre de 2026. Este trabajo no autoriza su consumo ni una actualización a pago por uso. La suscripción de prueba se deshabilitará al vencer si no se actualiza; por tanto, cualquier despliegue en esta suscripción sirve solo para una demostración temporal y no garantiza disponibilidad posterior. Si la cuota gratuita no cubre el recurso o el portal refleja consumo de crédito/costo, detener el despliegue y conservar únicamente la copia local cifrada.
 
 ## Arquitectura de costo cero dentro de cuota
 
@@ -23,29 +23,33 @@ La plantilla evita funciones de versionado, retencion y Change Feed para no crea
 
 ## Controles de presupuesto
 
-1. El titular revisa en Azure Portal la elegibilidad y las cuotas especificas de Storage antes de autorizar.
+1. El portal ya confirma una cuota gratuita para Blob Hot LRS en esta suscripción; revisar uso y límites antes y después de cada operación.
 2. Dejar activo el limite de gasto estudiantil y no actualizar a pago por uso.
 3. Leer Bicep y scripts; solo continuar si el portal indica que el despliegue y las operaciones caben en cuota gratuita.
-4. `deploy-storage.ps1` requiere escribir `DEPLOY-FREE-BLOB`; no ejecutarlo si la cuota no esta confirmada.
+4. `deploy-storage.ps1` ejecuta `what-if` y requiere escribir `APPLY-FREE-BLOB`; cancela si la vista previa falla o la cuota no está confirmada.
 5. `upload-backup.ps1` rechaza archivos distintos de `.tar.enc`, exige el `.sha256` y limita el contenedor a 4.5 GB.
 6. Revisar costo/consumo tras cada operacion. Si el costo estimado es mayor que cero, detener cargas y no usar creditos.
-7. Antes de que venza el periodo gratuito, eliminar el recurso si no se tiene otra cuota gratuita confirmada. La eliminacion puede borrar el unico respaldo externo: verificar y guardar previamente la copia local.
+7. Antes del vencimiento de la prueba el 23 de diciembre de 2026, verificar y guardar la copia local y eliminar el recurso temporal si no se ha aprobado una alternativa gratuita que mantenga la disponibilidad. El vencimiento de la prueba deshabilita la suscripción aunque la cuota Blob indique vigencia hasta 2027.
 8. No cargar datos reales de estudiantes hasta que Juridica apruebe ubicacion, transferencia, contrato, retencion y derechos de titulares.
 
-## Despliegue condicionado
+## Despliegue y estado observado
 
-1. Instalar Azure CLI y el titular inicia sesion localmente con `az login`; nunca compartir contrasenas, tokens o subscription ID en el repositorio.
-2. Confirmar la cuota gratuita actual en el portal, saldo, limites y fecha de vencimiento. La plantilla propone `southcentralus`; cambiarla si la oferta no cubre la region.
-3. Ejecutar `infrastructure/azure/deploy-storage.ps1` solo si los costos previstos son cero y el titular acepta crear el recurso.
-4. Verificar en Access Control (IAM) la asignacion RBAC y en la cuenta TLS, acceso privado del contenedor, acceso anonimo y Shared Key.
-5. Cargar backup sintetico cifrado con `upload-backup.ps1`; comprobar SHA-256 y restaurar en entorno aislado.
-6. Anotar bytes, operaciones, elegibilidad, fecha, hash y resultado en evidencia. No afirmar RPO/RTO cumplido sin medirlo.
+1. Azure CLI se instaló el 24 de noviembre de 2026 para desplegar infraestructura. El 25-11-2026 su autenticación de datos falló con `AADSTS530035`; la carga se completó desde el portal con la sesión MFA de Entra. No incluir tokens, contraseñas o ID de suscripción en el repositorio.
+2. El portal confirmó la cuota de Blob gratuita. La plantilla se desplegó en `southcentralus` al grupo `rg-sgsi-ufvv-demo`.
+3. `what-if` mostró cuatro recursos. Azure informó `Succeeded`; se creó la cuenta `ufvvsgsi63svuskqb2xne` y el contenedor `sgsi-backups`.
+4. Verificación posterior: Standard LRS Hot, HTTPS obligatorio, TLS 1.2, acceso anónimo y Shared Key deshabilitados, contenedor sin acceso público y RBAC `Storage Blob Data Contributor` para el operador.
+5. El 24-11-2026 el portal confirmó la carga de `securecommerce-20261125T013838Z.tar.enc` (179.03 KiB) y su `.sha256` (115 B) al contenedor privado. El hash local se verificó antes de transferir. El respaldo de demostración es de SecureCommerce; la copia descargada desde Azure y la restauración aún no se han probado.
+6. El portal indicó uso gratuito cero antes del despliegue; revisar de nuevo en 24–48 horas, porque los medidores pueden demorarse. Registrar métricas y no afirmar RPO/RTO cumplido sin ejercicio de restauración.
 
-La infraestructura esta preparada, pero no desplegada. No se ha recibido permiso para consumir creditos, ni se han creado recursos Azure.
+El recurso está desplegado para demostración dentro de la cuota gratuita. La suscripción Free Trial vence el 23 de diciembre de 2026; sin una alternativa aprobada y sin costo, Azure deshabilitará la suscripción y el respaldo dejará de estar disponible. No consumir el crédito promocional ni actualizar a pago por uso.
 
 ## Referencias oficiales
 
-Microsoft. (s. f.). *Azure for Students*. https://learn.microsoft.com/azure/education-hub/about-azure-for-students
+Microsoft. (s. f.). *Check usage of free services included with your Azure free account*. https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/check-free-service-usage
+
+Microsoft. (s. f.). *Avoid charges with your Azure free account*. https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/avoid-charges-free-account
+
+Microsoft. (s. f.). *Microsoft Entra authentication & authorization error codes*. https://learn.microsoft.com/en-us/entra/identity-platform/reference-error-codes
 
 Microsoft. (s. f.). *Azure free services*. https://azure.microsoft.com/en-us/pricing/free-services/
 

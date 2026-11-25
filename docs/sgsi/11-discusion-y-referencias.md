@@ -40,7 +40,9 @@ International Organization for Standardization. (2024). *ISO 22301:2019/Amd 1:20
 
 ISACA. (2018). *COBIT 2019 framework: Introduction and methodology*. https://www.isaca.org/resources/cobit
 
-Microsoft. (s. f.). *Azure for Students*. Microsoft Learn. Recuperado el 23 de noviembre de 2026, de https://learn.microsoft.com/azure/education-hub/about-azure-for-students
+Microsoft. (s. f.). *Check usage of free services included with your Azure free account*. Microsoft Learn. https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/check-free-service-usage
+
+Microsoft. (s. f.). *Avoid charges with your Azure free account*. Microsoft Learn. https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/avoid-charges-free-account
 
 National Institute of Standards and Technology. (2012). *Guide for conducting risk assessments* (NIST Special Publication 800-30 Rev. 1). https://doi.org/10.6028/NIST.SP.800-30r1
 
