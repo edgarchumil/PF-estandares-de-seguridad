@@ -221,7 +221,7 @@ if __name__ == '__main__':
     parser.add_argument('--api-url', default='https://securecommerce-ee-api.onrender.com/api/v1')
     parser.add_argument('--apply', action='store_true')
     args = parser.parse_args()
-    data = json.loads((ROOT / 'docs/data/tecnomarket.json').read_text(encoding='utf-8'))
+    data = json.loads((ROOT / 'backend/data/tecnomarket.json').read_text(encoding='utf-8'))
     assets, risks = prepare(data)
     print('Validación correcta: 12 activos, 120 amenazas específicas, 120 brechas, 120 riesgos y 120 acciones.', flush=True)
     if args.apply:

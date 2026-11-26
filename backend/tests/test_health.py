@@ -22,7 +22,7 @@ def test_openapi_is_available() -> None:
         response = client.get("/openapi.json")
 
     assert response.status_code == 200
-    assert response.json()["info"]["title"] == "SecureCommerce Advisor"
+    assert response.json()["info"]["title"] == "CGSI"
 
 
 def test_readiness_returns_ok_when_dependencies_are_ready(monkeypatch: object) -> None:

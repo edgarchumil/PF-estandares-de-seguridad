@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     ai_output_cost_per_million: float = Field(default=0, ge=0)
     report_storage_path: str = "storage/reports"
     report_execution_mode: Literal["celery", "background"] = "celery"
+    frontend_dist_path: str = ""
 
     @field_validator("cors_origins", mode="before")
     @classmethod

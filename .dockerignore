@@ -7,4 +7,18 @@
 frontend/dist
 coverage
 *.log
+**/dist
+**/.env*
+!**/.env.example
+**/.git
+**/.secrets
+**/.mypy_cache
+**/.ruff_cache
+docs
+tmp
+tools
+backend/output
+*.md
+*.docx
+*.pdf
 

@@ -13,8 +13,8 @@ describe('HomePage', () => {
   afterEach(() => vi.useRealTimers())
   it('muestra el logo y el nombre durante dos segundos', () => {
     renderPage()
-    expect(screen.getByRole('status')).toHaveAccessibleName('Cargando SGSI-UFVV')
-    expect(screen.getByText('SecureCommerce')).toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveAccessibleName('Cargando CGSI')
+    expect(screen.getByText('CGSI')).toBeInTheDocument()
     act(() => vi.advanceTimersByTime(1999))
     expect(screen.getByRole('status')).toBeInTheDocument()
     act(() => vi.advanceTimersByTime(1))
@@ -23,7 +23,7 @@ describe('HomePage', () => {
   it('presenta la propuesta de valor de la plataforma', () => {
     renderPage()
     act(() => vi.advanceTimersByTime(2000))
-    expect(screen.getByRole('heading', { name: /proteja su empresa/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /proteja su universidad/i })).toBeInTheDocument()
     expect(screen.getByText('Evaluación NIST CSF 2.0')).toBeInTheDocument()
   })
 

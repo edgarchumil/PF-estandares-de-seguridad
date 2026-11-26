@@ -1,8 +1,8 @@
 # ruff: noqa: E501
 from datetime import UTC, datetime
+from html import escape
 from pathlib import Path
 from typing import Any
-from xml.sax.saxutils import escape
 
 from reportlab.graphics.shapes import Drawing, Rect, String
 from reportlab.lib import colors
@@ -127,7 +127,7 @@ def build_pdf(path: Path, report_type: str, data: dict[str, Any]) -> None:
 
     def p(value: Any, style: str = "body") -> Paragraph:
         text = "No registrado" if value is None or value == "" else str(value)
-        return Paragraph(escape(text).replace("\n", "<br/>"), styles[style])
+        return Paragraph(escape(text, quote=False).replace("\n", "<br/>"), styles[style])
 
     def label(value: Any) -> str:
         return LABELS.get(str(value), str(value)) if value else "No registrado"

@@ -1,5 +1,6 @@
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,6 +10,7 @@ from app.core.config import settings
 from app.core.database import dispose_engine
 from app.core.middleware import CorrelationIdMiddleware
 from app.core.redis import close_redis
+from app.frontend import mount_frontend
 
 
 @asynccontextmanager
@@ -21,7 +23,10 @@ async def lifespan(_: FastAPI) -> AsyncIterator[None]:
 app = FastAPI(
     title=settings.app_name,
     version="0.1.0",
-    description="Centro de Gestión de Seguridad de la Información (CGSI) de la Universidad Ficticia del Valle Verde.",
+    description=(
+        "Centro de Gestión de Seguridad de la Información (CGSI) "
+        "de la Universidad Ficticia del Valle Verde."
+    ),
     docs_url="/docs",
     redoc_url="/redoc",
     lifespan=lifespan,
@@ -37,6 +42,9 @@ app.add_middleware(
 app.include_router(api_router, prefix=settings.api_v1_prefix)
 
 
-@app.get("/", include_in_schema=False)
-async def root() -> dict[str, str]:
-    return {"name": settings.app_name, "docs": "/docs"}
+if settings.frontend_dist_path:
+    mount_frontend(app, Path(settings.frontend_dist_path))
+else:
+    @app.get("/", include_in_schema=False)
+    async def root() -> dict[str, str]:
+        return {"name": settings.app_name, "docs": "/docs"}

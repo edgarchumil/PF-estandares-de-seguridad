@@ -17,3 +17,13 @@ coverage/
 Thumbs.db
 tmp/
 .secrets/
+docs/
+*.md
+*.docx
+*.pdf
+*.pptx
+.env.*
+!.env.example
+backend/storage/
+*.dump
+*.backup

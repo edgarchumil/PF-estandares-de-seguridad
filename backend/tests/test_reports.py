@@ -112,7 +112,7 @@ def test_executive_and_technical_pdfs_are_valid(tmp_path: Path) -> None:
         reader = PdfReader(path)
         text = "".join(page.extract_text() or "" for page in reader.pages)
         assert len(reader.pages) >= 2
-        assert "SECURECOMMERCE ADVISOR" in text
+        assert "SGSI-UFVV" in text
         assert "Principales riesgos" in text
         if report_type == "technical":
             assert "Inventario incluido" in text

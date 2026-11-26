@@ -154,7 +154,9 @@ async def seed() -> None:
                 organization_id=organization.id,
                 created_by=creator.id,
                 name="MFA no exigida a cuentas privilegiadas",
-                description="Supuesto académico: acceso de alto impacto sin segundo factor obligatorio.",
+                description=(
+                    "Supuesto académico: acceso de alto impacto sin segundo factor obligatorio."
+                ),
                 severity=4,
             )
             db.add(vulnerability)
@@ -178,7 +180,9 @@ async def seed() -> None:
                 created_by=creator.id,
                 code="RSK-DEMO-001",
                 title="Compromiso de cuenta docente mediante phishing",
-                description="Escenario ficticio para demostrar priorización y tratamiento en la UFVV.",
+                description=(
+                    "Escenario ficticio para demostrar priorización y tratamiento en la UFVV."
+                ),
                 asset_id=mail_asset.id,
                 threat_id=threat.id,
                 vulnerability_id=vulnerability.id,
@@ -280,7 +284,9 @@ async def seed() -> None:
                     organization_id=organization.id,
                     created_by=creator.id,
                     title="Intento de acceso sospechoso a expediente estudiantil (demostración)",
-                    description="Evento ficticio para demostrar la gestión universitaria de incidentes.",
+                    description=(
+                        "Evento ficticio para demostrar la gestión universitaria de incidentes."
+                    ),
                     severity=IncidentSeverity.MEDIUM,
                     occurred_at=datetime.now(UTC),
                 )

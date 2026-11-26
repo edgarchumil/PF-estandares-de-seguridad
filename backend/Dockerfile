@@ -8,6 +8,7 @@ COPY pyproject.toml ./
 COPY app/__init__.py ./app/__init__.py
 RUN pip install --no-cache-dir .
 COPY app ./app
+COPY data ./data
 COPY alembic ./alembic
 COPY alembic.ini ./
 COPY render-start.sh ./render-start.sh

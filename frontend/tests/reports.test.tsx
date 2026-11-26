@@ -15,5 +15,5 @@ it.each(['org_admin', 'analyst', 'viewer'])('muestra el alcance y respeta el rol
   expect(await screen.findByText('Empresa actual')).toBeInTheDocument()
   expect(await screen.findByText('Todavía no hay informes')).toBeInTheDocument()
   expect(Boolean(screen.queryByRole('button', { name: 'Generar PDF' }))).toBe(role !== 'viewer')
-  if (role !== 'viewer') expect(screen.getByLabelText(/Alcance declarado/)).toHaveValue('Activos, riesgos, controles e incidentes registrados para la empresa seleccionada.')
+  if (role !== 'viewer') expect(screen.getByLabelText(/Alcance declarado/)).toHaveValue('Activos, riesgos, controles e incidentes registrados para la universidad seleccionada.')
 })
