@@ -52,6 +52,37 @@ def test_worker_ping() -> None:
     assert ping.run() == "pong"
 
 
+@pytest.mark.parametrize("database_ready, expected_status", [(True, 200), (False, 503)])
+def test_background_readiness_requires_only_database(
+    monkeypatch: pytest.MonkeyPatch, database_ready: bool, expected_status: int
+) -> None:
+    monkeypatch.setattr(health.settings, "report_execution_mode", "background")
+    monkeypatch.setattr(health, "database_is_ready", AsyncMock(return_value=database_ready))
+    redis_probe = AsyncMock(return_value=False)
+    monkeypatch.setattr(health, "redis_is_ready", redis_probe)
+    with TestClient(app) as client:
+        response = client.get("/api/v1/health/ready")
+
+    assert response.status_code == expected_status
+    assert response.json()["services"] == {
+        "database": {"status": "ok" if database_ready else "error"},
+    }
+    redis_probe.assert_not_awaited()
+
+
+def test_celery_readiness_still_requires_redis(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(health.settings, "report_execution_mode", "celery")
+    monkeypatch.setattr(health, "database_is_ready", AsyncMock(return_value=True))
+    monkeypatch.setattr(health, "redis_is_ready", AsyncMock(return_value=False))
+    with TestClient(app) as client:
+        response = client.get("/api/v1/health/ready")
+
+    assert response.status_code == 503
+    assert response.json()["services"] == {
+        "database": {"status": "ok"}, "redis": {"status": "error"},
+    }
+
+
 class FakeConnection:
     async def __aenter__(self):  # type: ignore[no-untyped-def]
         return self
